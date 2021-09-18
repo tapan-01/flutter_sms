@@ -20,7 +20,7 @@ public class SmsStateHandler implements EventChannel.StreamHandler, PluginRegist
 
     private BroadcastReceiver smsStateChangeReceiver;
     final private PluginRegistry.Registrar registrar;
-    //private Permissions permissions;
+    private Permissions permissions;
     EventChannel.EventSink eventSink;
 
     public SmsStateHandler(PluginRegistry.Registrar registrar) {
@@ -33,8 +33,12 @@ public class SmsStateHandler implements EventChannel.StreamHandler, PluginRegist
     public void onListen(Object o, EventChannel.EventSink eventSink) {
         this.eventSink = eventSink;
         smsStateChangeReceiver = new SmsStateChangeReceiver(eventSink);
-        registerDeliveredReceiver();
-        registerSentReceiver();
+        if(permissions.checkAndRequestPermission(
+                new String[]{Manifest.permission.RECEIVE_SMS},
+                Permissions.BROADCAST_SMS)){
+            registerDeliveredReceiver();
+            registerSentReceiver();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -57,5 +61,26 @@ public class SmsStateHandler implements EventChannel.StreamHandler, PluginRegist
         smsStateChangeReceiver = null;
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode != Permissions.BROADCAST_SMS) {
+            return false;
+        }
+        boolean isOk = true;
+        for (int res: grantResults) {
+            if (res != PackageManager.PERMISSION_GRANTED) {
+                isOk = false;
+                break;
+            }
+        }
+        if (isOk) {
+            registerDeliveredReceiver();
+            registerSentReceiver();
+            return true;
+        }
+        eventSink.error("#01", "permission denied", null);
 
+        return false;
+    }
 }
