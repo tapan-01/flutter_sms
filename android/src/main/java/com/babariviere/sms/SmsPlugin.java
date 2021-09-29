@@ -13,14 +13,14 @@ import io.flutter.plugin.common.StandardMethodCodec;
  * SmsPlugin
  */
 public class SmsPlugin {
-   // private static final String CHANNEL_RECV = "plugins.babariviere.com/recvSMS";
-   // private static final String CHANNEL_SMS_STATUS = "plugins.babariviere.com/statusSMS";
+    private static final String CHANNEL_RECV = "plugins.babariviere.com/recvSMS";
+    private static final String CHANNEL_SMS_STATUS = "plugins.babariviere.com/statusSMS";
     private static final String CHANNEL_SEND = "plugins.babariviere.com/sendSMS";
-   // private static final String CHANNEL_QUER = "plugins.babariviere.com/querySMS";
-   // private static final String CHANNEL_QUER_CONT = "plugins.babariviere.com/queryContact";
-   // private static final String CHANNEL_QUER_CONT_PHOTO = "plugins.babariviere.com/queryContactPhoto";
-   // private static final String CHANNEL_USER_PROFILE = "plugins.babariviere.com/userProfile";
-   // private static final String CHANNEL_SIM_CARDS = "plugins.babariviere.com/simCards";
+    private static final String CHANNEL_QUER = "plugins.babariviere.com/querySMS";
+    private static final String CHANNEL_QUER_CONT = "plugins.babariviere.com/queryContact";
+    private static final String CHANNEL_QUER_CONT_PHOTO = "plugins.babariviere.com/queryContactPhoto";
+    private static final String CHANNEL_USER_PROFILE = "plugins.babariviere.com/userProfile";
+    private static final String CHANNEL_SIM_CARDS = "plugins.babariviere.com/simCards";
 
     /**
      * Plugin registration.
