@@ -13,14 +13,14 @@ import io.flutter.plugin.common.StandardMethodCodec;
  * SmsPlugin
  */
 public class SmsPlugin {
-    private static final String CHANNEL_RECV = "plugins.babariviere.com/recvSMS";
+   // private static final String CHANNEL_RECV = "plugins.babariviere.com/recvSMS";
     private static final String CHANNEL_SMS_STATUS = "plugins.babariviere.com/statusSMS";
     private static final String CHANNEL_SEND = "plugins.babariviere.com/sendSMS";
-    private static final String CHANNEL_QUER = "plugins.babariviere.com/querySMS";
-    private static final String CHANNEL_QUER_CONT = "plugins.babariviere.com/queryContact";
-    private static final String CHANNEL_QUER_CONT_PHOTO = "plugins.babariviere.com/queryContactPhoto";
-    private static final String CHANNEL_USER_PROFILE = "plugins.babariviere.com/userProfile";
-    private static final String CHANNEL_SIM_CARDS = "plugins.babariviere.com/simCards";
+   // private static final String CHANNEL_QUER = "plugins.babariviere.com/querySMS";
+   // private static final String CHANNEL_QUER_CONT = "plugins.babariviere.com/queryContact";
+   // private static final String CHANNEL_QUER_CONT_PHOTO = "plugins.babariviere.com/queryContactPhoto";
+   // private static final String CHANNEL_USER_PROFILE = "plugins.babariviere.com/userProfile";
+   // private static final String CHANNEL_SIM_CARDS = "plugins.babariviere.com/simCards";
 
     /**
      * Plugin registration.
@@ -30,10 +30,12 @@ public class SmsPlugin {
         registrar.addRequestPermissionsResultListener(Permissions.getRequestsResultsListener());
 
         // SMS receiver
-        final SmsReceiver receiver = new SmsReceiver(registrar);
+      /*  final SmsReceiver receiver = new SmsReceiver(registrar);
         final EventChannel receiveSmsChannel = new EventChannel(registrar.messenger(),
                 CHANNEL_RECV, JSONMethodCodec.INSTANCE);
         receiveSmsChannel.setStreamHandler(receiver);
+
+        */
 
         // SMS status receiver
         new EventChannel(registrar.messenger(), CHANNEL_SMS_STATUS, JSONMethodCodec.INSTANCE)
@@ -46,7 +48,7 @@ public class SmsPlugin {
         sendSmsChannel.setMethodCallHandler(sender);
 
         /// SMS query
-        final SmsQuery query = new SmsQuery(registrar);
+      /*  final SmsQuery query = new SmsQuery(registrar);
         final MethodChannel querySmsChannel = new MethodChannel(registrar.messenger(), CHANNEL_QUER, JSONMethodCodec.INSTANCE);
         querySmsChannel.setMethodCallHandler(query);
 
@@ -68,5 +70,7 @@ public class SmsPlugin {
         //Sim Cards Provider
         new MethodChannel(registrar.messenger(), CHANNEL_SIM_CARDS, JSONMethodCodec.INSTANCE)
                 .setMethodCallHandler(new SimCardsProvider(registrar));
+
+       */
     }
 }
